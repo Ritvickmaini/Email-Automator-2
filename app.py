@@ -134,7 +134,7 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
                     <p style="margin-top:25px; font-size:14px;">
                       Mike Randell<br/>
                       Marketing Executive | B2B Growth Expo<br/>
-                      <a href="mailto:mike@southamptionbusinessshow.com" style="color:#D7262F;">mike@southamptionbusinessshow.com</a><br/>
+                      <a href="mailto:santosh@cardiffbusinessexpo.com" style="color:#D7262F;">santosh@cardiffbusinessexpo.com</a><br/>
                       (+44) 2034517166
                     </p>
 
@@ -154,7 +154,7 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
     """
 def send_email(sender_email, sender_password, row, subject, custom_html):
     try:
-        server = smtplib.SMTP("mail.southamptionbusinessshow.com", 587)
+        server = smtplib.SMTP("mail.cardiffbusinessexpo.com", 587)
         server.starttls()
         server.login(sender_email, sender_password)
 
@@ -167,7 +167,7 @@ def send_email(sender_email, sender_password, row, subject, custom_html):
         server.send_message(msg)
 
         try:
-            imap = imaplib.IMAP4_SSL("mail.southamptionbusinessshow.com")
+            imap = imaplib.IMAP4_SSL("mail.cardiffbusinessexpo.com")
             imap.login(sender_email, sender_password)
             imap.append('INBOX.Sent', '', imaplib.Time2Internaldate(time.time()), msg.as_bytes())
             imap.logout()
@@ -190,7 +190,7 @@ def send_delivery_report(sender_email, sender_password, report_file):
         with open(report_file, 'rb') as file:
             msg.add_attachment(file.read(), maintype='application', subtype='octet-stream', filename=os.path.basename(report_file))
 
-        server = smtplib.SMTP("mail.southamptionbusinessshow.com", 587)
+        server = smtplib.SMTP("mail.cardiffbusinessexpo.com", 587)
         server.starttls()
         server.login(sender_email, sender_password)
         server.send_message(msg)
@@ -211,7 +211,7 @@ st.title("📨 Automated Email Campaign Manager")
         #st.markdown(f"**{label}** | 👥 {c['total']} | ✅ {c['delivered']} | ❌ {c['failed']}")
 
 st.header("📤 Send Email Campaign")
-sender_email = st.text_input("Sender Email", value="mike@southamptionbusinessshow.com")
+sender_email = st.text_input("Sender Email", value="santosh@cardiffbusinessexpo.com")
 sender_password = st.text_input("Password", type="password")
 subject = st.text_input("Email Subject")
 default_html = """<p>Hi <strong>{name}</strong>,</p>
