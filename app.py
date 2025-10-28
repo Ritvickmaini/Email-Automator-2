@@ -132,8 +132,8 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
 
                     <!-- Signature (Locked) -->
                     <p style="margin-top:25px; font-size:14px;">
-                      Mike Randell<br/>
-                      Marketing Executive | B2B Growth Expo<br/>
+                      Santosh Kumar<br/>
+                      CEO | B2B Growth Hub<br/>
                       <a href="mailto:santosh@cardiffbusinessexpo.com" style="color:#D7262F;">santosh@cardiffbusinessexpo.com</a><br/>
                       (+44) 2034517166
                     </p>
