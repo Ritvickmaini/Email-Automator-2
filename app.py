@@ -133,7 +133,7 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
   Roger Bourne<br/>
   Sales Director<br/>
   3–4 March 2026 | London Olympia<br/>
-  <a href="mailto:rogerbourne@futuretechbusinessshow.com" style="color:#D7262F; font-weight:bold;">rogerbourne@futuretechbusinessshow.com</a><br/>
+  <a href="mailto:roger@futuretechbusinessshow.com" style="color:#D7262F; font-weight:bold;">roger@futuretechbusinessshow.com</a><br/>
   (+44) 2034517166
 </p>
 
@@ -212,7 +212,7 @@ st.title("📨 Automated Email Campaign Manager")
         #st.markdown(f"**{label}** | 👥 {c['total']} | ✅ {c['delivered']} | ❌ {c['failed']}")
 
 st.header("📤 Send Email Campaign")
-sender_email = st.text_input("Sender Email", value="rogerbourne@futuretechbusinessshow.com")
+sender_email = st.text_input("Sender Email", value="roger@futuretechbusinessshow.com")
 sender_password = st.text_input("Password", type="password")
 subject = st.text_input("Email Subject")
 default_html = """<p>Hi <strong>{name}</strong>,</p>
