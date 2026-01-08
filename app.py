@@ -27,7 +27,7 @@ def get_google_sheet():
     import gspread
     from google.oauth2.service_account import Credentials
 
-    credentials_path = "/etc/secrets/service_account.json"  # Path to secret file in Render
+    credentials_path = "service_account.json"  # Path to secret file in Render
     credentials = Credentials.from_service_account_file(
         credentials_path,
         scopes=SCOPE
@@ -48,7 +48,6 @@ def append_to_sheet(data_dict):
     if sheet:
         sheet.append_row(list(data_dict.values()), value_input_option="USER_ENTERED")
 
-
 # --- Uptime Check ---
 params = st.query_params
 if "ping" in params:
@@ -60,10 +59,9 @@ os.makedirs("campaign_results", exist_ok=True)
 os.makedirs("campaign_resume", exist_ok=True)
 
 # Functions
-
 def log_campaign(metadata):
-   # with open("campaigns.json", "w") as f:
-       # json.dump(load_campaigns_from_sheet() + [metadata], f, indent=2)
+    #with open("campaigns.json", "w") as f:
+        #json.dump(load_campaigns_from_sheet() + [metadata], f, indent=2)
     #append_to_sheet(metadata)
     pass
 
@@ -85,7 +83,7 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
     import urllib.parse
 
     # Tracking elements
-    event_url = "https://www.eventbrite.com/e/cardiff-business-awards-tickets-1907290861309?aff=oddtdtcreator"
+    event_url = "https://www.eventbrite.com/e/future-tech-expo-2026-book-your-visitor-ticket-at-premier-show-tickets-1654549846129?aff=oddtdtcreator"
     encoded_event_url = urllib.parse.quote(event_url, safe='')
     email_for_tracking = recipient_email if recipient_email else "unknown@example.com"
     encoded_subject = urllib.parse.quote(subject or "No Subject", safe='')
@@ -130,13 +128,16 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
 </table>
 
 
-                    <!-- Signature (Locked) -->
-                    <p style="margin-top:25px; font-size:14px;">
-                      Santosh Kumar<br/>
-                      CEO | B2B Growth Hub<br/>
-                      <a href="mailto:santosh@cardiffbusinessexpo.com" style="color:#D7262F;">santosh@cardiffbusinessexpo.com</a><br/>
-                      (+44) 2034517166
-                    </p>
+<!-- Signature (Locked) -->
+<p style="margin-top:25px; font-size:14px; font-weight:bold;">
+  Roger Bourne<br/>
+  Sales Director<br/>
+  3–4 March 2026 | London Olympia<br/>
+  <a href="mailto:rogerbourne@futuretechbusinessshow.com" style="color:#D7262F; font-weight:bold;">rogerbourne@futuretechbusinessshow.com</a><br/>
+  (+44) 2034517166
+</p>
+
+
 
                     <!-- Footer (Locked) -->
                     <p style="font-size:11px; color:#888; text-align:center; margin-top:30px;">
@@ -154,7 +155,7 @@ def generate_email_html(full_name, recipient_email=None, subject=None, custom_ht
     """
 def send_email(sender_email, sender_password, row, subject, custom_html):
     try:
-        server = smtplib.SMTP("mail.cardiffbusinessexpo.com", 587)
+        server = smtplib.SMTP("mail.futuretechbusinessshow.com", 587)
         server.starttls()
         server.login(sender_email, sender_password)
 
@@ -167,7 +168,7 @@ def send_email(sender_email, sender_password, row, subject, custom_html):
         server.send_message(msg)
 
         try:
-            imap = imaplib.IMAP4_SSL("mail.cardiffbusinessexpo.com")
+            imap = imaplib.IMAP4_SSL("mail.futuretechbusinessshow.com")
             imap.login(sender_email, sender_password)
             imap.append('INBOX.Sent', '', imaplib.Time2Internaldate(time.time()), msg.as_bytes())
             imap.logout()
@@ -190,7 +191,7 @@ def send_delivery_report(sender_email, sender_password, report_file):
         with open(report_file, 'rb') as file:
             msg.add_attachment(file.read(), maintype='application', subtype='octet-stream', filename=os.path.basename(report_file))
 
-        server = smtplib.SMTP("mail.cardiffbusinessexpo.com", 587)
+        server = smtplib.SMTP("mail.futuretechbusinessshow.com", 587)
         server.starttls()
         server.login(sender_email, sender_password)
         server.send_message(msg)
@@ -204,14 +205,14 @@ def send_delivery_report(sender_email, sender_password, report_file):
 st.title("📨 Automated Email Campaign Manager")
 
 #with st.expander("📜 View Past Campaigns"):
-    #for c in reversed(load_campaigns()):
-        #name = c.get("campaign_name", "")
-        #timestamp = c.get("timestamp", "")
-        #label = f"📧 {name} {timestamp}" if name else f"🕒 {timestamp}"
+   # for c in reversed(load_campaigns()):
+       # name = c.get("campaign_name", "")
+       # timestamp = c.get("timestamp", "")
+      #  label = f"📧 {name} {timestamp}" if name else f"🕒 {timestamp}"
         #st.markdown(f"**{label}** | 👥 {c['total']} | ✅ {c['delivered']} | ❌ {c['failed']}")
 
 st.header("📤 Send Email Campaign")
-sender_email = st.text_input("Sender Email", value="santosh@cardiffbusinessexpo.com")
+sender_email = st.text_input("Sender Email", value="rogerbourne@futuretechbusinessshow.com")
 sender_password = st.text_input("Password", type="password")
 subject = st.text_input("Email Subject")
 default_html = """<p>Hi <strong>{name}</strong>,</p>
@@ -232,7 +233,7 @@ campaign_name = st.text_input("Campaign Name", placeholder="e.g. MK Expo – VIP
 file = st.file_uploader("Upload CSV with `email`, `full name` columns")
 
 st.subheader("📧 Preview of Email:")
-st.components.v1.html(generate_email_html("Sarah Johnson", subject=subject, custom_html=custom_html), height=600, width= 1700, scrolling=True)
+st.components.v1.html(generate_email_html("Sarah Johnson", subject=subject, custom_html=custom_html), height=600, width=1700, scrolling=True)
 
 resume_data = None
 resume_choice = False
