@@ -74,9 +74,15 @@ def generate_email_html(
                 </table>
 
                 <p style="margin-top:25px;font-weight:bold">
-                  Roger<br/>
-                  Sales Director<br/>
+                  Regards<br/>
+                  Customer Success Team<br/>
+                  Future Tech Business Show</br>
+                  (+44) 2034517166<br/>
                   3–4 March 2026 | London Olympia<br/>
+                  <br/>
+                  On Behalf of<br/>
+                  Roger<br/>
+                  Show Director<br/>
                   <a href="mailto:roger@futuretechbusinessshow.com"
                      style="color:#D7262F">roger@futuretechbusinessshow.com</a><br/>
                   (+44) 2034517166
