@@ -85,7 +85,6 @@ def generate_email_html(
                   Show Director<br/>
                   <a href="mailto:roger@futuretechbusinessshow.com"
                      style="color:#D7262F">roger@futuretechbusinessshow.com</a><br/>
-                  (+44) 2034517166
                 </p>
 
                 <p style="font-size:11px;color:#888;margin-top:30px">
